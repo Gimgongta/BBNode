@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel='stylesheet' tpye='text/css' href='stylesheets/style.css' />
+
+<title>Insert title here</title>
+<script src="jss/common.js"></script>
+<script src="jss/common_vue.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<style>
+.container {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+}
+
+.c1, .c2, .c3, .c4, .c5 {
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .c2, .c3, .c4, .c5 {
+    width: 50%;
+  }
+}
+
+@media (min-width: 800px) {
+  .c1 {
+    width: 60%;
+  }
+  .c2 {
+    width: 40%;
+  }
+  .c3, .c4, .c5 {
+    width: 33.33%;
+  }
+}
+
+@media (min-width: 800px) {
+  .container {
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+
+
+table {
+	border-collapse: collapse;
+    width: 300px;
+    height: 300px;
+}
+
+
+tr, td {
+    border: 1px solid #DDDDDD;
+    
+}
+
+/* td {
+	background-color: #999999;
+} */
+
+/* th, td{
+	border: 1px solid #999999;
+} */
+/* html{cursor: url(cursor.png), auto} */
+
+h1 {
+  text-align: center;
+}
+#container {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  text-align: center;
+}
+#canvas {
+  border: solid 1px gray;
+  margin-bottom: 10px;
+  display: block;
+}
+
+
+</style>
+
+<script>
+
+
+var testFunc = function( x, y ){
+	
+	var $cell = document.getElementById( "fa" + x + "-" + y );
+	var color = $cell.getAttribute( "bgcolor" );
+	color = color == '#FFFFFF' ? '#123456' : '#FFFFFF';
+	$cell.setAttribute( "bgcolor", color );
+}
+
+
+
+var makeFaviTable = function( $id,  funcName, size ){
+	
+
+	var _element = window.document.getElementById( $id );
+	var returnEle = '';
+	
+	for( var i = 0 ; i < size ; i++ ){
+		
+		returnEle += '<tr>';
+		
+		for( var j = 0 ; j < size ; j++ ){
+			
+			returnEle += ' <td class="fa" id="fa'+ i + '-' + j + '"'; 
+			returnEle += ' bgcolor="#FFFFFF" ';
+			returnEle += ' onmousedown="javascript:' + funcName + '(' + i + ',' + j + ')"></td>';
+		}
+		
+		returnEle += '</tr>';
+		
+	}
+	_element.innerHTML = returnEle;
+		
+}
+
+</script>
+</head>
+<body>
+
+
+<table class='faviTable'>
+<thead></thead>
+<tbody id='favi'></tbody>
+</table>
+
+<!-- <h1>Download Canvas</h1>
+
+<div id="container">
+  <canvas id="canvas" width="200" height="200"></canvas>
+  <button id="btndownload">Download</button>
+</div> -->
+
+
+
+<script>
+
+makeFaviTable('favi','testFunc', 16);
+
+
+function setEvent(){
+	
+	$(".fa").mousedown( function(){
+		
+		$(".fa").mouseenter( function(){
+			
+			$(this).attr( "bgcolor", '#123456' ); 
+			
+			/* var $cell = $(this)
+			var color = $cell.attr( "bgcolor" );
+			color = color == '#FFFFFF' ? '#123456' : '#FFFFFF';
+			$cell.attr( "bgcolor", color ); */
+					
+		});
+		
+	});
+	
+	$(".fa").mouseup( function(){
+		
+		$(".fa").off();
+		setEvent();
+
+	}) 
+	
+	/* document.getElementsByClassName("fa").onmousedown = function(){
+		
+		console.log("1");
+		
+		document.getElementsByClassName("fa").onmouseover = function(){
+			
+			console.log("2 : " + this);
+			
+			//this.setAttribute( "bgcolor", '#123456' );
+			
+		};
+		
+	}; */
+	
+}
+
+function setEvent2(){
+	
+	
+}
+	
+
+
+
+
+document.getElementById("fa0-0").onclick = function(){alert('thanks');};
+	
+setEvent();
+
+var elements = document.getElementsByClassName("fa");
+
+
+for (var i = 0; i < elements.length; i++) {
+	
+	//console.log("elements " + i + " : " + elements[i] );
+  elements[i].addEventListener('onmousedown', function(){
+	  
+	  console.log("1");
+  });
+  
+	elements[i].addEventListener('onclick', function(){
+	  
+	  console.log("1");
+  });
+}
+
+document.querySelectorAll('.fa').forEach(function(node) {
+    //console.log("this : " + this)
+    this.addEventListener('onclick', function(){
+  	  
+  	  console.log("1");
+    });
+});
+
+
+/* window.onload = function(){
+	  var dwn = document.getElementById('btndownload'),
+	      canvas = document.getElementById('canvas'),
+	      context = canvas.getContext('2d');
+
+	  // Drawing a circle
+	  var centerX = canvas.width / 2;
+	  var centerY = canvas.height / 2;
+	  var radius = 70;
+	  context.beginPath();
+	  context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+	  context.fillStyle = 'rgba(0,200,0, .7)';
+	  context.fill();
+	  context.lineWidth = 2;
+	  context.strokeStyle = 'black';
+	  context.stroke();
+	  
+	  // Drawing a rect
+	  context.beginPath();
+	  context.rect(15, 50, 100, 100);
+	  context.fillStyle = 'rgba(255,255,0, .7)';
+	  context.fill();
+	  context.lineWidth = 2;
+	  context.strokeStyle = 'black';
+	  context.stroke();
+
+	  // Event handler for download
+	  dwn.onclick = function(){
+	    download(canvas, 'myimage.png');
+	  }
+
+	}
+
+
+	// Source from:  http://stackoverflow.com/questions/18480474/how-to-save-an-image-from-canvas
+
+	// Canvas Donwload 
+	function download(canvas, filename) {
+	  /// create an "off-screen" anchor tag
+	  var lnk = document.createElement('a'), e;
+
+	  /// the key here is to set the download attribute of the a tag
+	  lnk.download = filename;
+
+	  /// convert canvas content to data-uri for link. When download
+	  /// attribute is set the content pointed to by link will be
+	  /// pushed as "download" in HTML5 capable browsers
+	  lnk.href = canvas.toDataURL("image/png;base64");
+
+	  /// create a "fake" click-event to trigger the download
+	  if (document.createEvent) {
+	    e = document.createEvent("MouseEvents");
+	    e.initMouseEvent("click", true, true, window,
+	                     0, 0, 0, 0, 0, false, false, false,
+	                     false, 0, null);
+
+	    lnk.dispatchEvent(e);
+	  } else if (lnk.fireEvent) {
+	    lnk.fireEvent("onclick");
+	  }
+	}
+ */
+
+
+
+</script>
+
+</body>
+</html>

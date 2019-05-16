@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>Insert title here</title>
+<script src="jss/vue.js"></script>
+<script src="jss/common.js"></script>
+<script src="jss/common_vue.js"></script>
+<script src="jss/MyArray.js"></script>
+<script src="data/gray_data.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<link rel="shortcut icon" href="image/favicon_kt.ico" />
+
+<script>
+
+
+/* 	  
+var audioContext = new AudioContext();
+
+
+var bufferSize = 4096;
+var pinkNoise = ( function() {
+	
+    var b0, b1, b2, b3, b4, b5, b6;
+    b0 = b1 = b2 = b3 = b4 = b5 = b6 = 0.0;
+    
+    var node = audioContext.createScriptProcessor( bufferSize, 1, 1 );
+    
+    node.onaudioprocess = function(e) {
+    	
+        var output = e.outputBuffer.getChannelData(0);
+        
+        for (var i = 0; i < bufferSize; i++) {
+        	
+            var white = Math.random() * 2 - 1;
+            b0 = 0.99886 * b0 + white * 0.0555179;
+            b1 = 0.99332 * b1 + white * 0.0750759;
+            b2 = 0.96900 * b2 + white * 0.1538520;
+            b3 = 0.86650 * b3 + white * 0.3104856;
+            b4 = 0.55000 * b4 + white * 0.5329522;
+            b5 = -0.7616 * b5 - white * 0.0168980;
+            
+            output[i] = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362;
+            
+            output[i] *= 0.11; // (roughly) compensate for gain
+            
+            b6 = white * 0.115926;
+        }
+    }
+    
+    return node;
+    
+})();
+
+//audioContext.createScriptProcessor().connect(audioContext.destination)
+pinkNoise.connect(audioContext.destination); */
+
+
+//------------------------------------------------------------------------------
+
+/* 
+var RhythmSample = {
+};
+
+RhythmSample.play = function() {
+	
+  function playSound(buffer, time) {
+	  
+    var source = context.createBufferSource();
+    
+    source.buffer = buffer;
+    source.connect(context.destination);
+    
+    if (!source.start){
+    	source.start = source.noteOn;
+    }
+      
+    source.start(time);
+  }
+  
+
+  var kick = BUFFERS.kick;
+  var snare = BUFFERS.snare;
+  var hihat = BUFFERS.hihat;
+
+  // We'll start playing the rhythm 100 milliseconds from "now"
+  var startTime = context.currentTime + 0.100;
+  var tempo = 80; // BPM (beats per minute)
+  var eighthNoteTime = (60 / tempo) / 2;
+
+  // Play 2 bars of the following:
+  for (var bar = 0; bar < 2; bar++) {
+	  
+    var time = startTime + bar * 8 * eighthNoteTime;
+    // Play the bass (kick) drum on beats 1, 5
+    playSound(kick, time);
+    playSound(kick, time + 4 * eighthNoteTime);
+
+    // Play the snare drum on beats 3, 7
+    playSound(snare, time + 2 * eighthNoteTime);
+    playSound(snare, time + 6 * eighthNoteTime);
+
+    // Play the hi-hat every eighthh note.
+    for (var i = 0; i < 8; ++i) {
+    	
+      playSound(hihat, time + i * eighthNoteTime);
+      
+    }
+  }
+};
+ */
+//----------------
+
+
+
+
+
+</script>
+</head>
+<body>
+
+<input type='file' id='fileId' name='fileName' onChange='getFileInfo( this )' />
+
+<div id='forClock' >
+	<div id='thisClock' >
+		<input type='text' name='textClock' id='clockId' />
+	</div>
+</div>
+
+<p id="demo">Let AJAX change this text.</p>
+<p id="demo_">Let AJAX change this text.</p>
+
+<button type="button" onclick="loadDoc( 'GET', '/users', 'demo', { apa:'apa', bpb:'bpb' } )">Change Content</button>
+<button type="button" onclick="loadDoc( 'POST', '/users', 'demo_', { apa:'apa', bpb:'bpb' } )">Change Content</button>
+<button type="button" onclick="alertModal( 'aaa', 'bbb', '' )">make alert Content</button>
+
+
+
+<table id='tb'>
+<thead id='th'></thead>
+<tbody></tbody>
+</table>
+
+<table id='tb2'>
+
+</table>
+
+<ul class="buttons-list">
+    <li><button id="tetris">Play Tetris</button></li>
+    <li><button id="typesine">Sine</button></li>
+    <li><button id="typesquare">Square</button></li>
+    <li><button id="typesaw">Sawtooth</button></li>
+    <li><button id="typetriangle">Triangle</button></li>
+</ul>
+
+<ul id="midi-list">
+
+</ul>
+<div id="debug"></div>
+
+<canvas id='canv'></canvas>
+
+
+
+<script>
+
+
+count = 0;
+realtimeClock();
+
+getDOMInfo('tb');
+getDOMInfo('th');
+
+
+function realtimeClock() {
+	document.querySelector("#clockId").value = getTimeStamp();
+	setTimeout("realtimeClock()", 1000);
+}
+
+//----
+
+/* var context = null;
+var oscillator = null;
+function getOrCreateContext() {
+  if (!context) {
+    context = new AudioContext();
+    oscillator = context.createOscillator();
+    oscillator.connect(context.destination);
+  }
+  return context;
+  
+}
+const list = document.getElementById('midi-list');
+const debugEl = document.getElementById('debug');
+
+let isStarted = false;
+
+function changeType(type) {
+  oscillator.type = type;
+}
+
+const length = 2;
+const eps = 0.01;
+
+// This is a tetris theme transposed from https://musescore.com/user/16693/scores/38133
+const tetris = [
+  [76, 4], [71, 8], [72, 8], [74, 4], [72, 8], [71, 8], [69, 4], [69, 8], [72, 8], [76, 4], [74, 8], [72, 8], [71, 4], [71, 8], [72, 8], [74, 4], [76, 4], [72, 4], [69, 4], [69, 4], [0,  4], [74, 3], [77, 8],[81, 4], [79, 8], [77, 8], [76, 3], [72, 8], [76, 4], [74, 8], [72, 8], [71, 4], [71, 8], [72, 8], [74, 4], [76, 4], [72, 4], [69, 4], [69, 4], [0, 4],
+]
+
+function playTetris() {
+  getOrCreateContext();
+  oscillator.start(0);
+  var time = context.currentTime + eps;
+  tetris.forEach(note => {
+    const freq = Math.pow(2, (note[0]-69)/12)*440;
+    console.log(time);
+    oscillator.frequency.setTargetAtTime(0, time - eps, 0.001);
+    oscillator.frequency.setTargetAtTime(freq, time, 0.001);
+    time += length / note[1];
+  });
+}
+
+document.getElementById('typesine').addEventListener('click', changeType.bind(null, 'sine'));
+document.getElementById('typesquare').addEventListener('click', changeType.bind(null, 'square'));
+document.getElementById('typesaw').addEventListener('click', changeType.bind(null, 'sawtooth'));
+document.getElementById('typetriangle').addEventListener('click', changeType.bind(null, 'triangle'));
+
+document.getElementById('tetris').addEventListener('click', playTetris);
+
+function noteOn(midiNote) {
+  getOrCreateContext();
+  const freq = Math.pow(2, (midiNote-69)/12)*440;
+  oscillator.frequency.setTargetAtTime(freq, context.currentTime, 0);
+  if (!isStarted) {
+    oscillator.start(0);
+    isStarted = true;
+  } else {
+    context.resume();
+  }
+}
+
+function noteOff() {
+  context.suspend();
+}
+
+function connectToDevice(device) {
+  console.log('Connecting to device', device);
+  device.onmidimessage = function(m) {
+    const [command, key, velocity] = m.data;
+    if (command === 145) {
+      debugEl.innerText = 'KEY UP: ' + key;
+      noteOn(key);
+    } else if(command === 129) {
+      debugEl.innerText = 'KEY DOWN';
+      noteOff();
+    }
+  }
+}
+
+function replaceElements(inputs) {
+  while(list.firstChild) {
+    list.removeChild(list.firstChild)
+  }
+  const elements = inputs.map(e => {
+        console.log(e);
+        const el = document.createElement('li')
+        el.innerText = `${e.name} (${e.manufacturer})`;
+        el.addEventListener('click', connectToDevice.bind(null, e));
+        return el;
+    });
+
+    elements.forEach(e => list.appendChild(e));
+}
+
+navigator.requestMIDIAccess()
+    .then(function(access) {
+      console.log('access', access);
+      replaceElements(Array.from(access.inputs.values()));
+      access.onstatechange = function(e) {
+        replaceElements(Array.from(this.inputs.values()));
+      }
+
+    })
+
+
+// Below is keyboard emulation for C4-C5 q-i keys
+var emulatedKeys = {
+  q: 60,
+  w: 62,
+  e: 64,
+  r: 65,
+  t: 67,
+  y: 69,
+  u: 71,
+  i: 72,
+}
+
+document.addEventListener('keydown', function(e) {
+  console.log(e);
+  if (emulatedKeys.hasOwnProperty(e.key)) {
+    noteOn(emulatedKeys[e.key]);
+  }
+});
+
+document.addEventListener('keyup', function(e) {
+  if (emulatedKeys.hasOwnProperty(e.key)) {
+    noteOff();
+  }
+}); */
+
+//----------
+
+var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+var analyser = audioCtx.createAnalyser();
+
+
+
+var canvas = document.getElementById('canv');
+canvas.width = 512;
+canvas.height = 288;
+
+// canvasのcontextを取得
+var canvasCtx = canvas.getContext('2d');
+canvasCtx.fillStyle = 'rgb(16, 16, 24)';
+canvasCtx.lineWidth = 2;
+canvasCtx.strokeStyle = 'rgb(124, 224, 255)';
+
+
+var WIDTH = 512;
+var HEIGHT = 288;
+
+
+
+analyser.fftSize = 2048;
+var bufferLength = analyser.fftSize;
+var dataArray = new Uint8Array(bufferLength);
+analyser.getByteTimeDomainData(dataArray);
+
+
+var count = 0;
+var bufferSize = 4096;
+var pinkNoise = ( function() {
+	
+    var b0, b1, b2, b3, b4, b5, b6;
+    b0 = b1 = b2 = b3 = b4 = b5 = b6 = 0.0;
+    
+    var node = audioCtx.createScriptProcessor( bufferSize, 1, 1 );
+    
+    node.onaudioprocess = function(e) {
+    	
+        var output = e.outputBuffer.getChannelData(0);
+        
+        for (var i = 0; i < bufferSize; i++) {
+        	
+            var white = Math.random() * 2 - 1;
+            b0 = 0.99886 * b0 + white * 0.0555179;
+            b1 = 0.99332 * b1 + white * 0.0750759;
+            b2 = 0.96900 * b2 + white * 0.1538520;
+            b3 = 0.86650 * b3 + white * 0.3104856;
+            b4 = 0.55000 * b4 + white * 0.5329522;
+            b5 = -0.7616 * b5 - white * 0.0168980;
+            
+            output[i] = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362;
+            if( count < 10000 ){
+            	//console.log("output[" + i + "] : " + output[i]);
+            	count++;
+            }
+            
+            
+            output[i] *= 0.11; // (roughly) compensate for gain
+            
+            b6 = white * 0.115926;
+        }
+    }
+    
+    return node;
+    
+})();
+
+
+audioCtx.createScriptProcessor().connect(audioCtx.destination)
+pinkNoise.connect(audioCtx.destination);  
+
+/* var frequencies = [ 200, 400, 800, 1600 ];
+
+for (var i in frequencies) {
+    // Create oscillator and set up attributes
+    var oscillator = audioCtx.createOscillator();
+    oscillator.frequency.value = frequencies[i];
+    
+    var gainNode = audioCtx.createGain();
+    gainNode.gain.value = i * 0.1;
+    //oscillator.type = "square"; 
+
+    
+    
+    // Attach to destination
+    oscillator.connect(gainNode); 
+    gainNode.connect(audioCtx.destination);
+
+    // Play oscillator
+    
+    oscillator.start(0);
+} */
+
+
+
+function createNote( hz, size ){
+	
+	var frequencies = [];
+	
+	for( var i = 0 ; i < size ; i++ ){
+		
+		frequencies.push( hz + i * 5 );
+	}
+	
+	
+	var size = frequencies.length;
+
+	for (var i in frequencies) {
+	    // Create oscillator and set up attributes
+	    var oscillator = audioCtx.createOscillator();
+	    oscillator.frequency.value = frequencies[i];
+	    
+	    var gainNode = audioCtx.createGain();
+	    gainNode.gain.value = ( size - i ) * size;
+	    //oscillator.type = "square"; 
+
+	    
+	    
+	    // Attach to destination
+	    oscillator.connect(gainNode); 
+	    gainNode.connect(audioCtx.destination);
+
+	    // Play oscillator
+	    
+	    oscillator.start(0);
+	    //oscillator.stop(audioCtx.currentTime + 2); 
+	}
+	
+	
+}
+
+//createNote( 440, 1000 )
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

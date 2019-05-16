@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel='stylesheet' tpye='text/css' href='stylesheets/style.css' />
+<title>Insert title here</title>
+<!-- <script src="jss/vue.js"></script> -->
+<script src="jss/common.js"></script>
+<script src="jss/common_vue.js"></script>
+<link rel="shortcut icon" href="image/favicon_kt.ico" />
+<script>
+
+//abc - 10,1,20,2,30,3,0,11,12
+var _10 = [ 'axx', 'xbx', 'xxc' ];
+var _01 = [ 'xax', 'xxa', 'bxx', 'xxb', 'cxx', 'xcx' ];
+var _20 = [ 'abx', 'axc', 'xbc' ];
+var _02 = [ 'bax', 'bxa', 'xab', 'cax', 'cxa', 'xca', 'bcx', 'cxb', 'xcb' ];
+var _30 = [ 'abc' ];
+var _03 = [ 'bca', 'cab' ];
+var _00 = [ 'xxx' ];
+var _11 = [ 'axb', 'acx', 'xba', 'cbx', 'xac', 'bxc' ];
+var _12 = [ 'acb', 'cba', 'bac' ];
+
+//abc - not
+var _10_ = [ 'xax', 'xxa', 'bxx', 'xxb', 'cxx', 'xcx' ];
+var _01_ = [ 'axx', 'xbx', 'xxc' ];
+var _20_ = [ 'axb', 'acx', 'cbx', 'xba', 'bxc', 'xac', 'xax', 'xxa', 'bxx', 'xxb', 'cxx', 'xcx' ];
+var _02_ = [ 'abx', 'axc', 'xbc', 'axx', 'xbx', 'xxc' ];
+var _30_ = [ 'xxx' ];
+var _03_ = [ 'xxx' ];
+var _00_ = [ 'acb', 'cba', 'bac' ];
+var _11_ = [ 'abx', 'axc', 'xbc' ];
+var _12_ = [ 'xxx' ];
+
+//mapping
+var possibleArr = [ _00, _01, _02, _03, 0, 0, 0, 0, 0, 0, 
+					_10, _11, _12, 0, 0, 0, 0, 0, 0, 0, 
+					_20, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					_30 ];
+					
+var notPossibleArr = [ _00_, _01_, _02_, _03_, 0, 0, 0, 0, 0, 0, 
+						_10_, _11_, _12_, 0, 0, 0, 0, 0, 0, 0, 
+						_20_, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+						_30_ ];
+
+
+var possibleNum = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ];
+
+var before = [];
+var goal = [];
+var mergeArr = [];
+//var mergeSize = 0;
+
+
+var not_one = [];
+var not_two = [];
+var not_three = [];
+
+var notPatten = [ ];
+
+var notPossibleNumPatten = [];
+var siz = 0;
+
+var testThreeNum = '';
+
+
+function getOneNumber(){
+	
+	do{
+		
+		var outNum = possibleNum[ Math.floor( Math.random() * possibleNum.length ) ];
+	
+	}while( outNum == 'x' );
+	
+	return outNum;
+}
+
+function getThreeNumber(){	
+
+	
+	var stack = 0;
+	
+	do{
+		
+		if( testThreeNum != '' ){
+			
+			return testThreeNum;
+		} 
+		
+		var dupFlag = false;
+		var pattenFlag = true;
+		
+		var a = getOneNumber();
+		var b = getOneNumber();
+		var c = getOneNumber();
+		
+		var threeNumber = "" + a + b + c;
+		
+		//
+		var tempSize = mergeArr.length == 0 ? 0 : mergeArr.length - 1;
+		var last_merge = mergeArr[ tempSize ];
+		
+		if(  tempSize != 0 && isAllNumber( last_merge ) ){
+			
+			threeNumber = last_merge[ Math.floor( Math.random() * last_merge.length ) ];
+
+		}
+		//
+		
+		for( var i = 0 ; i < before.length ; i++ ){
+			
+			if( threeNumber == before[i] ){
+				dupFlag = true;
+				break;
+			}
+		} 
+		
+		var sizeOfNotPossibleNumPatten = notPossibleNumPatten.length;
+		
+		for( var i = 0 ; i < sizeOfNotPossibleNumPatten ; i++ ){
+			pattenFlag = isPossibleNumber( threeNumber, notPossibleNumPatten[ i ] );
+			if( !pattenFlag ) break;
+			
+		}
+		
+		stack++;
+		
+		if( stack == 5000 ){
+			console.log('***breakOut***');
+			return document.getElementById('num').value;
+		}
+		
+	}while( a == b || a == c || b == c || dupFlag || !pattenFlag );
+	
+	
+
+	return threeNumber;
+	
+}
+
+function getResult( textNum ){
+	
+	var ANSWER = document.getElementById('num').value;
+	var result = 0;
+	
+	var answerArr = ANSWER.split('');
+	var sizeOfAnswerArr = answerArr.length;
+
+	var textArr = textNum.split('');
+	var sizeOfTextArr = textArr.length;
+	
+	for( var i = 0 ; i < sizeOfAnswerArr ; i++ ){
+		
+		for( var j = 0 ; j < sizeOfAnswerArr ; j++ ){
+			
+			if( answerArr[ i ] == textArr[ j ] ){
+				
+				result = i == j ? result + 10 : result + 1;
+				break;
+			}
+			
+		}
+		
+	}
+	
+	console.log( textNum + " : " + result );
+	return result;
+
+}
+
+
+
+function startBB(){
+	
+
+	
+	var count = 0;
+ 	var endFlag = false;
+ 	
+ 	
+	while( !endFlag ){
+		
+		count++;
+		
+		var now = getThreeNumber();
+		var r = getResult( now );
+		
+		
+		setNotPossibleNumPatten( now, r );
+		//setCantNumber( now, r );
+		
+		//vvvvvvvvvvvvvvvv
+		if( r == 0 ){
+			var nowArr = now.split('');
+			var sizeOfNowArr = nowArr.length;
+			
+			for( i = 0 ; i < sizeOfNowArr ; i++ ){
+				possibleNum[ nowArr[ i ] ] = 'x';
+				
+			}
+			
+			
+		} else if( r == 3 || r == 12 ){
+			
+			var nowArr = now.split('');
+			var sizeOfNowArr = nowArr.length;
+			possibleNum = [];
+			
+			for( i = 0 ; i < sizeOfNowArr ; i++ ){
+				possibleNum[ i ] = nowArr[ i ] ;
+				
+			}
+			
+		}
+		
+	
+		makeArr( now, r );
+		endFlag = isEnd( now );
+		before.push( now )
+		
+	
+	}
+	console.log( "before : " + before );
+	console.log( "end : " + count);
+	
+
+	
+}
+
+function isEnd( textNum ){
+	
+	var ANSWER = document.getElementById('num').value;
+	//console.log("notPossibleNumPatten : " +  notPossibleNumPatten.join("/") );
+	return textNum == ANSWER ? true : false;
+	
+}
+
+
+
+function makeArr( now, result ){
+	
+	var resultArr = [];
+	var textNum = now; 
+	
+	
+	
+	var textArr = textNum.split("");
+	var sizeOfTextArr = textArr.length;
+	
+	
+	var possiblePatten = possibleArr[ result ];
+	var sizeOfPossiblePatten = possiblePatten.length;
+	
+	for( var i = 0 ; i < sizeOfPossiblePatten ; i++ ){
+		
+		var getPatten = possiblePatten[ i ];
+		var sizeOfPattenArr = getPatten.length;
+		
+		var tempText = '';
+		
+		for( var j = 0 ; j < sizeOfPattenArr ; j++ ){
+			
+			var pattne_j = getPatten[ j ];
+			
+			if( pattne_j  == 'a' ){
+				tempText += textArr[ 0 ];
+			}
+			else if( pattne_j == 'b' ){
+				tempText += textArr[ 1 ];	
+			}
+			else if( pattne_j == 'c' ){
+				tempText += textArr[ 2 ];
+			}
+			else{
+				tempText += 'x';
+			}
+
+		}
+		resultArr.push( tempText );
+	}
+	
+	console.log( "resultArr : " + resultArr );
+	
+	//------------------------------------
+	
+	if( resultArr[0] == 'xxx' ){
+		return;
+	}
+	
+	if(mergeArr.length == 0 ){
+		
+		mergeArr.push( resultArr );
+		
+	} else {
+		
+		var last_merge = mergeArr[ mergeArr.length - 1 ];
+		realMerge( last_merge, resultArr );
+	}
+	
+	//console.log("mergeArr : " + mergeArr.join('/'));
+	
+	//------------------------------------------
+	
+	var cantPatten = notPossibleArr[ result ];
+	var sizeOfCantPatten = cantPatten.length;
+	
+	for( var i = 0 ; i < sizeOfCantPatten ; i++ ){
+		
+		var getPatten = cantPatten[ i ];
+		var sizeOfPattenArr = getPatten.length;
+		
+		var tempText = '';
+		
+		for( var j = 0 ; j < sizeOfPattenArr ; j++ ){
+			
+			var pattne_j = getPatten[ j ];
+			
+			if( pattne_j  == 'a' ){
+				tempText += textArr[ 0 ];
+			}
+			else if( pattne_j == 'b' ){
+				tempText += textArr[ 1 ];	
+			}
+			else if( pattne_j == 'c' ){
+				tempText += textArr[ 2 ];
+			}
+			else{
+				tempText += 'x';
+			}
+
+		}
+		notPatten.push( tempText );
+		
+	}
+	
+	notPatten = notPatten.reduce(function(a,b){if(a.indexOf(b)<0)a.push(b);return a;},[]);
+	
+	console.log("notPatten : " + notPatten.join('/') );
+		
+	//-----------------------------------------------
+}
+
+
+function setNotPossibleNumPatten( textNum, result ){
+	
+
+	
+	var textArr = textNum.split('');
+	var sizeOfTextArr = textArr.length;
+	
+	if( result == 10 || result == 1 ){
+
+		setTwoOfThree( textArr ) ;
+	}
+	else if( result == 2 || result == 20 || result == 11 ){
+		
+		notPossibleNumPatten.push( textNum )
+	}
+	
+	
+	
+
+	
+}
+
+
+function isPossibleNumber( textNum, textPatten ){
+	
+	var textArr = textNum.split('');
+	var sizeOfTextArr = textArr.length;
+	
+	var pattenArr = textPatten.split('');
+	var sizeOfPattenArr = pattenArr.length;
+	var count = sizeOfPattenArr;
+	
+	
+	if( sizeOfPattenArr == 0 ){
+		return true;
+	} 
+	
+	for( var i = 0 ; i < sizeOfTextArr ; i++ ){
+		
+		for( var j = 0 ; j < sizeOfPattenArr ; j++ ){
+			
+			if( textArr[ i ] == pattenArr[ j ] ){
+				
+				count--;
+				
+			}
+		}
+	}
+	
+	return count == 0 ? false : true;
+}
+
+
+function getOneOfThree( arr ){
+	
+	var tempArr = [];
+	var sizeOfArr = arr.length;
+	
+	for( var i = 0 ; i < sizeOfArr ; i++ ){
+		
+		tempArr.push( [ arr[ i ] ] );
+		
+	}
+	
+	return tempArr;
+	
+}
+
+
+function setTwoOfThree( arr ){
+	
+	//var tempArr = [];
+	var sizeOfArr = arr.length;
+	
+	for( var i = 0 ; i < sizeOfArr - 1 ; i++ ){
+		
+		for( var j = i + 1 ; j < sizeOfArr ; j++ ){
+			
+			if( arr[i] != arr[j] ) {
+				notPossibleNumPatten.push(  "" + arr[ i ] + arr[ j ]  );
+			}
+			
+		}
+		
+	}
+	
+	//return tempArr;
+}
+
+function getThreeOfThree( arr ){
+	return arr.split('');
+}
+
+
+
+function filltering(){
+	
+	
+}
+
+
+function merge( x, y, size ){
+	
+	//var resultArr = [];
+	
+	var result = '';
+	
+	var arr_x = x.split('');
+	var arr_y = y.split('');
+	
+	for( var i = 0 ; i < size ; i++ ){
+		
+		var unit_x = arr_x[ i ];	
+		var unit_y = arr_y[ i ];
+		
+		if( unit_x == unit_y ){
+			
+			result += unit_x;
+		}
+		else if( unit_x == 'x' && unit_y != 'x' ){
+			
+			result += unit_y;
+		}
+		else if( unit_x != 'x' && unit_y == 'x' ){
+			
+			result += unit_x;
+		}
+		else{
+			return '';
+		}
+		
+	}
+	
+	var result_arr = result.split('');
+	
+	for( var i = 0 ; i < size ; i++ ){
+		
+		for( var j = 0 ; j < size ; j++ ){
+
+			if( i != j && result_arr[ i ] == result_arr[ j ] ){
+				
+				return '';
+			}
+		}
+	}
+	
+	
+	
+	return result;
+	
+	
+}
+
+
+
+function realMerge( mergeArr_last, patten_Now ){
+	
+	var resultArr = [];
+	var result = '';
+	
+	var sizeOfMergeArr = mergeArr_last.length;
+	var sizeOfPatten = patten_Now.length;
+	
+	for( var i = 0 ; i < sizeOfMergeArr ; i++ ){
+		
+		var arr_i = mergeArr_last[ i ];
+		
+		for( var j = 0 ; j < sizeOfPatten ; j++ ){
+			
+			var arr_j = patten_Now[ j ];
+			
+			result = merge( arr_i, arr_j, 3 );
+			
+			if( result != '' ){ resultArr.push( result ); }
+			
+		}
+	}
+		
+	//넣기 전 중복제거...
+	var arr = resultArr.reduce(function(a,b){if(a.indexOf(b)<0)a.push(b);return a;},[]);
+	
+	mergeArr.push( arr );
+	
+	if( arr.length == 1 ){
+		testThreeNum = resultArr[0];
+	}
+	console.log( "mergeResult : " + arr );
+	
+	
+}
+
+function isAllNumber( mergeArr ){
+	
+	var sizeOfMergeArr = mergeArr.length;
+	
+	for( var i = 0 ; i < sizeOfMergeArr ; i++ ){
+		
+		if(  mergeArr[ i ].indexOf('x') >= 0  ){
+			return false;
+		}
+		
+	}
+	return true;
+	
+}
+
+function isPossiblePatten( textNum, cantPatten ){
+	
+	var textArr = textNum.split('');
+	
+	
+}
+
+
+function setCantNumber( textNum, result ){
+	
+	
+	var numArr = textNum.split('');
+	var notPossiblePatten = notPossibleArr[ result ];
+	var sizeOfNotPossiblePatten = notPossiblePatten.length;
+	
+	for( var i = 0 ; i < sizeOfNotPossiblePatten ; i++ ){
+		
+		var getNotPatten = notPossiblePatten[ i ];
+		var sizeOfNotPattenArr = getNotPatten.length;
+		
+		var tempText = '';
+		
+		for( var j = 0 ; j < sizeOfNotPattenArr ; j++ ){
+			
+			var pattne_j = getNotPatten[ j ];
+			
+			if( pattne_j  == 'a' ){
+				notPatten[ 0 ].push( numArr[0] )
+			}
+			else if( pattne_j == 'b' ){
+				notPatten[ 1 ].push( numArr[1] )
+			}
+			else if( pattne_j == 'c' ){
+				notPatten[ 2 ].push( numArr[2] )
+			}
+			else{
+				
+			}
+
+		}
+		
+	}
+	
+	console.log( "notPatten : " + notPatten.join("/") );
+		
+}
+
+function isCantNumber( textNum, cantPatten ){
+	
+	//x는 모든 숫자 가능
+	var count = 0;
+	var numArr = textNum.split('');
+	
+	for( var i = 0 ; i < 3 ; i++ ){
+		
+		if( cantPatten[i] == 'x' || ( cantPatten[i] != 'x' && textNum[i] == cantPatten[i] ) ){
+			count++;
+		}
+		
+	}
+	
+	return count == 3 ? true : false;
+	
+}
+
+
+
+
+</script>
+</head>
+<body>
+
+<input type='text' name='num' id='num' />
+<input type='button' value='button' onclick='javascript:startBB()'/>
+<input type='button' value='re' onclick='window.document.location.reload()' />
+
+
+<script>
+
+
+
+</script>
+</body>
+</html>

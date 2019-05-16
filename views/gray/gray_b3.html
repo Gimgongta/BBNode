@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel='stylesheet' tpye='text/css' href='stylesheets/style.css' />
+<title>Insert title here</title>
+<!-- <script src="jss/vue.js"></script> -->
+<script src="jss/common.js"></script>
+<script src="jss/common_vue.js"></script>
+<link rel="shortcut icon" href="image/favicon_kt.ico" />
+<script>
+
+
+var mergeArr = [];
+var lastMerge = [];
+var impossiblePattenArr = [ ];
+var totalCount = 0;
+
+
+function start( answer ){
+	
+	mergeArr = [];
+	lastMerge = [];
+	impossiblePattenArr = [ ];
+	totalCount = 0;
+	
+	
+	var answerArr = answer.split('');
+	var size = answerArr.length;
+	
+	var ABC = [ 'a', 'b', 'c', 'd', 'x' ];
+	thisABC = [];
+	
+	for( var i = 0 ; i < size ; i++ ){
+		thisABC.push( ABC[ i ] );
+	}
+	
+	//make...
+	//abc - 10,1,20,2,30,3,0,11,12
+	var _10 = [ 'axx', 'xbx', 'xxc' ];
+	var _01 = [ 'xax', 'xxa', 'bxx', 'xxb', 'cxx', 'xcx' ];
+	var _20 = [ 'abx', 'axc', 'xbc' ];
+	var _02 = [ 'bax', 'bxa', 'xab', 'cax', 'cxa', 'xca', 'bcx', 'cxb', 'xcb' ];
+	var _30 = [ 'abc' ];
+	var _03 = [ 'bca', 'cab' ];
+	var _00 = [ 'xxx' ];
+	var _11 = [ 'axb', 'acx', 'xba', 'cbx', 'xac', 'bxc' ];
+	var _12 = [ 'acb', 'cba', 'bac' ];
+
+
+	var __1 = [ 'axx', 'xax', 'xxa', 'bxx', 'xbx', 'xxb', 'cxx', 'xcx', 'xxc' ];
+	var __2 = [ 'abx', 'axb', 'xab', 'bax', 'bxa', 'xba', 'bcx', 'bxc', 'xbc', 'cbx', 'cxb', 'xcb', 'acx', 'axc', 'xac', 'cax', 'cxa', 'xca' ];
+	var __3 = [ 'abc', 'acb', 'bac', 'bca', 'cab', 'cba'];
+
+	//abc - not
+	var _10_ = [ 'xax', 'xxa', 'bxx', 'xxb', 'cxx', 'xcx' ].concat( __2 ).concat( __3 );
+	var _01_ = [ 'axx', 'xbx', 'xxc' ].concat( __2 ).concat( __3 );
+	var _20_ = [ 'axb', 'acx', 'cbx', 'xba', 'bxc', 'xac', 'xax', 'xxa', 'bxx', 'xxb', 'cxx', 'xcx' ].concat( __3 );
+	var _02_ = [ 'abx', 'axc', 'xbc', 'axx', 'xbx', 'xxc' ].concat( __3 );
+	var _30_ = [ 'acb', 'bac', 'bca', 'cab', 'cba' ];
+	var _03_ = [ 'axx', 'xbx', 'xxc' ];
+	var _00_ = __1.concat( __2 ).concat( __3 );
+	var _11_ = [ 'abx', 'axc', 'xbc' ].concat( __3 );
+	var _12_ = [ 'abc' ];
+
+	//mapping
+	var possibleArr = [ _00, _01, _02, _03, 0, 0, 0, 0, 0, 0, 
+						_10, _11, _12, 0, 0, 0, 0, 0, 0, 0, 
+						_20, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+						_30 ];
+						
+	var imPossibleArr = [ _00_, _01_, _02_, _03_, 0, 0, 0, 0, 0, 0, 
+							_10_, _11_, _12_, 0, 0, 0, 0, 0, 0, 0, 
+							_20_, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+							_30_ ];
+	
+	
+	
+	var count = 0;
+ 	var endFlag = false;
+ 	var before = [];
+ 	
+	while( !endFlag ){
+		
+		count++;
+		
+		var now = getNumber( size );
+		
+		if( count >= 30000 ){
+			console.log('***breakOut1***');
+			now =  document.getElementById('num').value;
+		}
+		
+		var numArr = now.split('');
+		var r = getResult( numArr, answerArr, size );
+		
+		console.log( now + " : " + r );
+		
+		lastMerge = makePatten( numArr, r, lastMerge, possibleArr );
+		
+		impossiblePattenArr = setImpossiblePattenArr( numArr, r, impossiblePattenArr, imPossibleArr );
+		console.log("impossiblePattenArr : " + impossiblePattenArr );
+		
+		lastMerge = fillteringMerge( lastMerge, impossiblePattenArr );
+		console.log("lastMerge : " + lastMerge );
+		
+		before.push( now );
+		endFlag = isEnd( now, answer );
+		
+	}
+	
+	console.log( "before : " + before );
+	console.log( "totalCount : " + totalCount );
+	console.log( "end : " + count );
+	
+	return count;
+	
+}
+
+//****
+function getSizeNumber( size ){
+	
+	var num = [];
+	
+	do{
+		var isDupflag = false;
+		var numberArr = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ];
+		var sizeOfNumberArr = numberArr.length;
+		
+		for( var i = 0 ; i < size ; i++ ){
+			
+			num[ i ] = numberArr[ Math.floor( Math.random() * sizeOfNumberArr ) ];
+			if( num[ i ] == 'x' ){
+				isDupflag = true;
+				break;
+			}
+			numberArr[ num[ i ] ] = 'x'
+		}
+		
+	}while( isDupflag );
+	
+	return num.join('');	
+}
+
+
+function getNumber( size ){	
+	
+	var stack = 0;
+	
+	do{
+		
+		stack++;
+		
+		//
+		if( stack >= 30000 ){
+			console.log('***breakOut2***');
+			return document.getElementById('num').value;
+		}
+		//
+		
+		
+		totalCount++;
+		var pattenFlag = false;
+		var pattenFlag2 = true;
+		var threeNumber = getSizeNumber( size ); 
+		
+		
+		/* var mergeSize = lastMerge.length;
+		if(  mergeSize != 0 && isAllNumber( lastMerge ) ){
+			threeNumber = lastMerge[ Math.floor( Math.random() * mergeSize ) ];
+		} */
+		
+		
+		var pattenSize = impossiblePattenArr.length;
+		for( var i = 0 ; i < pattenSize ; i++ ){
+			
+			pattenFlag =  isCantNumber( threeNumber, impossiblePattenArr[i] );
+			if( pattenFlag ) { break; }
+					
+		}
+		
+		
+		pattenSize = lastMerge.length;
+		for( var i = 0 ; i < pattenSize ; i++ ){
+			
+			pattenFlag2 = isCanNumber( threeNumber, lastMerge[i] );
+			if( pattenFlag2 ) { break; }
+					
+		}
+		
+		
+		
+	}while(  pattenFlag || !pattenFlag2  );
+	
+	return threeNumber;
+	
+}
+
+//****
+function getResult( numArr, answerArr, size ){
+	
+	var result = 0;
+	
+	for( var i = 0 ; i < size ; i++ ){
+		for( var j = 0 ; j < size ; j++ ){
+			if( answerArr[ i ] == numArr[ j ] ){
+				result = i == j ? result + 10 : result + 1;
+				break;
+			}
+		}	
+	}
+	
+	
+	return result;
+}
+
+//****
+function isEnd( textNum, answer ){
+	return textNum == answer ? true : false;	
+}
+
+
+
+function makePatten( textArr, result, lastMerge, possibleArr ){
+	
+	var resultArr = [];
+	var tempText = '';
+	
+	var possiblePatten = possibleArr[ result ];
+	var sizeOfPossiblePatten = possiblePatten.length;
+	
+	for( var i = 0 ; i < sizeOfPossiblePatten ; i++ ){
+		
+		var getPatten = possiblePatten[ i ];
+		var sizeOfPattenArr = getPatten.split('').length;
+		
+		tempText = '';
+		
+		for( var j = 0 ; j < sizeOfPattenArr ; j++ ){
+			
+			var pattne_j = getPatten[ j ];
+			
+			if( pattne_j  == thisABC[ 0 ] ){
+				tempText += textArr[ 0 ];
+			}
+			else if( pattne_j == thisABC[ 1 ] ){
+				tempText += textArr[ 1 ];	
+			}
+			else if( pattne_j == thisABC[ 2 ] ){
+				tempText += textArr[ 2 ];
+			}
+			else{
+				tempText += 'x';
+			}
+
+		}
+		resultArr.push( tempText );
+	}
+	
+	return lastMerge.length == 0 ? resultArr : realMerge( lastMerge, resultArr );
+
+}
+
+function setImpossiblePattenArr( textArr, result, impossiblePattenArr, imPossibleArr ){
+	
+	var tempText = '';
+	
+	var impossiblePatten = imPossibleArr[ result ];
+	var sizeOfImpossiblePatten = impossiblePatten.length;
+	
+	for( var i = 0 ; i < sizeOfImpossiblePatten ; i++ ){
+		
+		var getPatten = impossiblePatten[ i ];
+		var sizeOfPattenArr = getPatten.length;
+		
+		tempText = '';
+		
+		for( var j = 0 ; j < sizeOfPattenArr ; j++ ){
+			
+			var pattne_j = getPatten[ j ];
+			
+			if( pattne_j  == 'a' ){
+				tempText += textArr[ 0 ];
+			}
+			else if( pattne_j == 'b' ){
+				tempText += textArr[ 1 ];	
+			}
+			else if( pattne_j == 'c' ){
+				tempText += textArr[ 2 ];
+			}
+			else{
+				tempText += 'x';
+			}
+
+		}
+		impossiblePattenArr.push( tempText );
+		
+	}
+	
+	return impossiblePattenArr.reduce(function(a,b){if(a.indexOf(b)<0)a.push(b);return a;},[]);
+		
+	
+}
+
+function merge( x, y, size ){
+	
+	var result = '';
+	
+	var arr_x = x.split('');
+	var arr_y = y.split('');
+	
+	for( var i = 0 ; i < size ; i++ ){
+		
+		var unit_x = arr_x[ i ];	
+		var unit_y = arr_y[ i ];
+		
+		
+		//result = result + ( unit_x == 'x' ? unit_y : unit_x );
+		if( unit_x == unit_y ){
+			
+			result += unit_x;
+		}
+		else if( unit_x == 'x' && unit_y != 'x' ){
+			
+			result += unit_y;
+		}
+		else if( unit_x != 'x' && unit_y == 'x' ){
+			
+			result += unit_x;
+		}
+		else{
+			return '';
+		}
+		
+	}
+	
+	var result_arr = result.split('');
+	
+	for( var i = 0 ; i < size ; i++ ){
+		
+		for( var j = 0 ; j < size ; j++ ){
+
+			if( i != j && result_arr[ i ] == result_arr[ j ] && result_arr[ i ] != 'x' && result_arr[ j ] != 'x' ){
+				
+				return '';
+			}
+		}
+	}
+	
+	return result;
+
+}
+
+
+
+function realMerge( mergeArr_last, patten_Now ){
+	
+	var resultArr = [];
+	var result = '';
+	
+	var sizeOfMergeArr = mergeArr_last.length;
+	var sizeOfPatten = patten_Now.length;
+	
+	for( var i = 0 ; i < sizeOfMergeArr ; i++ ){
+		
+		var arr_i = mergeArr_last[ i ];
+		
+		for( var j = 0 ; j < sizeOfPatten ; j++ ){
+			
+			var arr_j = patten_Now[ j ];
+			
+			result = merge( arr_i, arr_j, 3 );
+			
+			if( result != '' ){ resultArr.push( result ); }
+			
+		}
+	}
+		
+	return resultArr.reduce(function(a,b){if(a.indexOf(b)<0)a.push(b);return a;},[]);
+		
+}
+
+function fillteringMerge( lastMerge, impossiblePattenArr ){
+	
+	var fillteredResultArr = [];
+	
+	for( var i = 0 ; i < lastMerge.length ; i++ ){
+		
+		for( var j = 0 ; j < impossiblePattenArr.length ; j++ ){
+			
+			if( !isCantNumber( lastMerge[i], impossiblePattenArr[j], 3 ) ){
+				
+				fillteredResultArr.push( lastMerge[i] );
+				break;
+			}
+			
+		}
+	}
+	
+	return fillteredResultArr;
+	
+}
+
+/* function isAllNumber( lastMerge ){
+	
+	var sizeOfMergeArr = lastMerge.length;
+	
+	for( var i = 0 ; i < sizeOfMergeArr ; i++ ){
+		
+		if(  lastMerge[ i ].indexOf('x') >= 0  ){
+			return false;
+		}
+		
+	}
+	return true;
+	
+} */
+
+
+function isCantNumber( textNum, cantPatten ){
+	
+	
+	var count = 0;
+	var numArr = textNum.split('');
+	
+	for( var i = 0 ; i < 3 ; i++ ){	
+		if( cantPatten[ i ] == 'x' || ( cantPatten[ i ] != 'x' && textNum[ i ] == cantPatten[ i ] ) ){
+			count++;
+		}	
+	}
+	
+	return count == 3 ? true : false;
+}
+
+function isCanNumber( textNum, canPatten ){
+	
+	
+	var count = 0;
+	var numArr = textNum.split('');
+	
+	for( var i = 0 ; i < 3 ; i++ ){	
+		if( canPatten[ i ] == 'x' || ( canPatten[ i ] != 'x' && textNum[ i ] == canPatten[ i ] ) ){
+			count++;
+		}	
+	}
+	
+	return count == 3 ? true : false;
+}
+
+
+</script>
+</head>
+<body>
+
+
+<!-- <input type='button' value='merge' onclick='merge( "xxx", "234", 3)' /> -->
+
+<input type='text' name='num' id='num' />
+<!-- <input type='button' value='test' onclick='test()'/> -->
+<input type='button' value='button' onclick='javascript:start( document.getElementById("num").value )'/>
+<input type='button' value='re' onclick='window.document.location.reload()' />
+
+<script>
+
+function test(){
+	
+	var count = 0;
+	
+	for( var i = 0 ; i < 1000 ; i++ ){
+		count = count + start( document.getElementById("num").value );
+	}
+	
+	console.log("fullCount : " + count / 1000 );
+	
+}
+
+
+</script>
+</body>
+</html>

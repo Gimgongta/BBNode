@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel='stylesheet' tpye='text/css' href='stylesheets/style.css' />
+<title>Insert title here</title>
+<script src="jss/vue.js"></script>
+<script src="jss/common.js"></script>
+<script src="jss/common_vue.js"></script>
+<script src="jss/MyArray.js"></script>
+<script>
+
+var count = 0;
+
+setInterval( ()=>{ document.title = count++; }, 5000 );
+
+goGray_1 = function() {
+	location.href = '/gray1';
+}
+
+var animals = [
+	  { species: 'Lion', name: 'King' },
+	  { species: 'Whale', name: 'Fail' }
+	];
+
+	for (var i = 0; i < animals.length; i++) {
+	  (function(i) {
+	    this.print = function() {
+	      console.log('#' + i + ' ' + this.species + ': ' + this.name);
+	    }
+	    this.print();
+	  }).call(animals[i], i);
+	}
+	
+var sData = 'Wisen';            
+function display(){
+	
+	console.log('sData value is %s ', sData);
+}
+
+display.call();  // sData value is Wisen
+
+
+
+function exec( a, b ){
+	
+	var icon_a = a;
+	var icon_b = b;
+	var dup = 10;
+	
+	return {
+		
+		sum : function() { return icon_a + icon_b; }
+		, mns : function() { return icon_a - icon_b; }
+		, mtp : function( ex1, ex2 ) { return ex1 * ex2; }
+		, getIcon_a : function() { return icon_a; }
+		, getDup : function() { return dup; }
+		
+	} 
+}
+
+exec.prototype.glb = 15;
+
+Number.prototype.num = 111;
+Number.prototype.plusThis = function( t ) { return this + t; } 
+var nu1 = new Number();
+nu1 = 1000
+console.log("nu1.num : " + nu1.num );
+console.log("nu1.plusThis : " + nu1.plusThis(12) );
+
+
+var testExec = new exec( 6, 7 );
+console.log("testExec.getIcon_a() : " + testExec.getIcon_a() );
+console.log("testExec.mtp(4,9) : " + testExec.mtp(4,9) );
+//console.log("testExec.dup : " + testExec.where );
+
+/* console.log("1 : " + exec( 3, 4 ).mtp(7,7) );
+console.log("2 : " + exec( 3, 4 ).sum() );
+ */
+
+ 
+ //------------------------------------------------------
+ 
+ var arr1 = new MyArray();
+ 
+
+ arr1.getConsole();
+ arr1.push();
+ 
+ console.log("arr1 : " + arr1[0] );
+
+ 
+ function mag() {
+	 
+	 var a = 1;
+	 var b = 2;
+	 
+	 return a+b;
+ }
+
+ mag.prototype.getMinus = 4; 
+ mag.prototype.getPlus = function(){ return 5; } 
+ 
+var k = new mag();
+var m = mag();
+
+console.log('m : ' + m );
+console.log('k : ' + k );
+
+console.log('m.getMinus() : ' + m.getMinus );
+console.log('m.getPlus() : ' + m.getPlus );
+
+
+console.log('k.getMinus() : ' + k.getMinus );
+console.log('k.getPlus() : ' + k.getPlus() );
+
+var con = function(){
+	
+	console.log("hey");
+}
+
+
+
+
+
+
+</script>
+</head>
+<body>
+
+<input type='button' value='goToOne' onclick='javascript:goGray_1()'/>
+<form id='grayForm' action="/gray2" method="post">
+<input type='text' name='grayText' value='grayText' />
+<input type='submit' value='submit' />
+
+
+</form>
+
+<br>
+<br>
+<br>
+
+
+<div id='starText'></div>
+
+<div id='starText2'></div>
+
+
+
+<script>
+makeBox('starText2', 'this Is Test', 'con' );
+makeBox('starText', 'this Is Test', 'con' );
+
+
+
+</script>
+</body>
+</html>

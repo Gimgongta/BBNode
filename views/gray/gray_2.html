@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel='stylesheet' tpye='text/css' href='stylesheets/style.css' />
+<title>Insert title here</title>
+<script src="jss/common.js"></script>
+<script src="jss/common_vue.js"></script>
+<script>
+
+function setZeroUpToLength( text, leg ) {
+	
+	var zero = '';
+	text = text.toString();
+	var sizeOfText = text.length;
+	var zeroLength = leg - sizeOfText
+	
+	if ( zeroLength > 0 ) {
+		
+		for ( var i = 0 ; i < zeroLength ; i++ ){
+			
+			zero += '0';
+		}
+	}
+	
+	sizeOfText = null, zeroLength = null;
+	return zero + text;
+}
+
+</script>
+
+
+</head>
+<body>
+
+<div id='sqlText'></div>
+
+
+<script>
+
+var sql = document.getElementById('sqlText');
+
+var sqlStr = '';
+
+for( var i = 0 ; i < 500 ; i++ ){
+	
+	sqlStr += "( 3333" + setZeroUpToLength( i + 330, 3),+ " '180913-0000', 'ABBCCCDDDDABBCCCDDDD', 'comment', '20', '100.0', '2018/09/17 10:00', '2018/09/17 10:00' ), ";
+	
+	
+	
+}
+
+sql.innerHTML = sqlStr
+
+
+
+</script>
+</body>
+</html>

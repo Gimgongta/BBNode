@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel='stylesheet' tpye='text/css' href='stylesheets/style.css' />
+<!-- <style type="text/css">
+
+ul {
+  list-style: none;
+}
+
+.buttons-list li {
+  display: inline-block;
+}
+
+button {
+  border: 1px solid #333;
+  background: #DDD;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+#tetris {
+  background: #4466ff;
+  color: #FFF;
+}
+</style> -->
+<title>Insert title here</title>
+
+<script src="jss/common.js"></script>
+
+<link rel="shortcut icon" href="image/favicon_kt.ico" />
+
+<script>
+
+
+var key = 0;
+var count = 8;
+var seed = 300;
+var range = 10;
+var suff = 400 ;
+
+var space = count * count;
+var spaceInt = [];
+var spaceHz = [];
+var spaceStr = [];
+
+var rocket = [];
+
+var rand = 0;
+var X = 0;
+var Y = 0;
+var temp = 0;
+
+function makeFrac() {
+
+	
+	
+	rocket = makeNote();
+	console.log("result : " + rocket );
+	
+	
+	
+}
+
+function makeNote() {
+
+	for( var i = 0 ; i < count ; i++ ) {
+		for( var j = i * i ; j < ( i + 1 ) * ( i + 1 ) ; j++ ) {
+			spaceInt[ j ] = count - 1 - i;
+		}
+	}
+	
+	for( var i = 0 ; i < suff ; i++ ) {
+		X = parseInt( Math.random() * space );
+		Y = parseInt( Math.random() * space );
+
+		temp = spaceInt[ X ];
+		spaceInt[ X ] = spaceInt[ Y ];
+		spaceInt[ Y ] = temp;
+	}
+
+	if( spaceInt[ 0 ] != 0 ) {
+		for( var i = 0 ; i < spaceInt.length ; i++) {
+			if( spaceInt[ i ] == 0 ) {
+				spaceInt[ i ] = spaceInt[ 0 ];
+				spaceInt[ 0 ] = 0;
+				break;
+			}
+		}
+	}
+
+	for(var i = 0 ; i < space ; i++ ) {
+		rand =  ( parseInt( Math.random() * 2 ) == 0 ) ? -1 : 1;
+		seed = seed + ( spaceInt[ i ] * rand * range );
+		spaceHz[ i ] = seed;
+	}
+
+	return spaceHz;
+}
+
+//---------------------------------------------------------------------------------
+
+var context = null;
+var oscillator = null;
+
+function getOrCreateContext() {
+	
+  if (!context) {
+	  
+    context = new AudioContext();
+    oscillator = context.createOscillator();
+    oscillator.connect(context.destination);
+  }
+  
+  return context;
+  
+}
+
+const isStarted = false;
+
+
+function playTetris() {
+	
+	//makeFrac();
+	
+	const length = 2;
+	const eps = 0.01;
+	
+	console.log("start");
+	
+	getOrCreateContext();
+	//oscillator.stop();
+ 	oscillator.start(0);
+  
+  	var time = context.currentTime + eps;
+  	rocket.forEach( note => {
+	  
+	    //const freq = Math.pow( 2, ( note[ 0 ] - 69 ) / 12 ) * 440;
+	    
+	    const freq = note
+	    //console.log(time);
+	    oscillator.frequency.setTargetAtTime(0, time - eps, 0.001);
+	    oscillator.frequency.setTargetAtTime(freq, time, 0.001);
+	    //time += length / note[1];
+	    time += length / count;
+    
+  	});
+  
+  console.log("end");
+}
+
+
+/* document.getElementById('typesine').addEventListener('click', changeType.bind(null, 'sine'));
+document.getElementById('typesquare').addEventListener('click', changeType.bind(null, 'square'));
+document.getElementById('typesaw').addEventListener('click', changeType.bind(null, 'sawtooth'));
+document.getElementById('typetriangle').addEventListener('click', changeType.bind(null, 'triangle')); 
+
+document.getElementById('tetris').addEventListener('click', playTetris);
+ */
+
+
+</script>
+
+</head>
+<body>
+
+<ul class="buttons-list">
+    <li><button id="tetris" onclick='playTetris()'>P</button></li>
+</ul>
+
+<ul id="midi-list">
+
+</ul>
+<div id="debug"></div>
+
+
+<script>
+
+
+makeFrac();
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

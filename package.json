@@ -1,0 +1,13 @@
+{
+  "name": "myNode",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+	"dateformat": "^3.0.3",
+    "express": "3.2.6",
+    "jade": "*"
+  }
+}
