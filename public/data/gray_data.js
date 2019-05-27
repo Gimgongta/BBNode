@@ -22,4 +22,4 @@ var gray_data = [
 		pronunciation:'ありふれる'
 	}
 	
-	]
+	];

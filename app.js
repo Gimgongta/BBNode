@@ -12,8 +12,9 @@ var express = require('express')
   , path = require('path');
 
 var router_gary = require('./routes/gray')
-
 var app = express();
+
+var stc = require('./routes/stc');
 
 // all environments
 app.set('port', process.env.PORT || 3001 );
@@ -31,11 +32,15 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+var conn = require('./conn/connection');
+conn.connect();
+
 app.get('/', routes.index );
 app.get('/users', user.list);
 app.post('/users', user.list);
 
 app.get('/puzzle', puzzle.data);
+app.get('/stc', stc.data)
 
 //vvvvvvvvvvvvvvvvvvvvvvvvvvvv
 app.get('/gray', router_gary.gray );
