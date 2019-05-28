@@ -55,7 +55,7 @@ app.get('/grayf', router_gary.gray_f );
 
 //----------
 
-var str = " insert into stc values('안녕하세요'), ";
+var str = " insert into stc values(안녕하세요), ";
 str += " ('반갑습니다'), ";
 str += " ('감사해요'), ";
 str += " ('다시만나요') ";
