@@ -9,7 +9,7 @@ var data = 'errer';
 
 exports.data = function( req, res ){
 	
-	conn.query('SELECT stc from sentence order by rand() limit 1', function(err, rows, fields) {
+	conn.query('SELECT stc from stc order by rand() limit 1', function(err, rows, fields) {
 		
 		  if (!err){
 			  

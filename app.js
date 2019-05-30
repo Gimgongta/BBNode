@@ -55,29 +55,7 @@ app.get('/grayf', router_gary.gray_f );
 
 //----------
 
-var str = " insert into stc values('안녕하세요'), ";
-str += " ('반갑습니다') ";
-str += " ('감사해요') ";
-str += " ('다시만나요') ";
-str += " ; ";
 
-
-conn.query( str , function(err, rows, fields) {
-	
-			  if (!err){
-				  
-				  console.log('data : ', rows);
-				  
-			  }
-				 
-			  else {
-				  
-				  console.log('err : ', err);
-			  }
-		  
-		}	
-	  
-);
 //--------------
 
 

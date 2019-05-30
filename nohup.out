@@ -1,0 +1,417 @@
+Express server listening on port 3001
+data :  hello
+[90mGET /stc [32m200 [90m9ms - 5b[0m
+data :  good
+[90mGET /stc [32m200 [90m2ms - 4b[0m
+data :  good
+[90mGET /stc [32m200 [90m1ms - 4b[0m
+data :  world
+[90mGET /stc [32m200 [90m1ms - 5b[0m
+data :  nice
+[90mGET /stc [32m200 [90m1ms - 4b[0m
+data :  world
+[90mGET /stc [32m200 [90m1ms - 5b[0m
+exit
+[90mGET /puzzle [32m200 [90m186ms - 29b[0m
+data :  world
+[90mGET /stc [32m200 [90m2ms - 5b[0m
+data :  hello
+[90mGET /stc [32m200 [90m1ms - 5b[0m
+exit
+[90mGET /puzzle [32m200 [90m2ms - 24b[0m
+exit
+[90mGET /puzzle [32m200 [90m89ms - 24b[0m
+exit
+[90mGET /puzzle [32m200 [90m62ms - 24b[0m
+exit
+[90mGET /puzzle [32m200 [90m18ms - 19b[0m
+exit
+[90mGET /puzzle [32m200 [90m29ms - 29b[0m
+exit
+[90mGET /puzzle [32m200 [90m46ms - 29b[0m
+exit
+[90mGET /puzzle [32m200 [90m9ms - 24b[0m
+exit
+[90mGET /puzzle [32m200 [90m288ms - 29b[0m
+exit
+[90mGET /puzzle [32m200 [90m36ms - 34b[0m
+exit
+[90mGET /puzzle [32m200 [90m2ms - 29b[0m
+exit
+[90mGET /puzzle [32m200 [90m2ms - 19b[0m
+data :  world
+[90mGET /stc [32m200 [90m1ms - 5b[0m
+exit
+[90mGET /puzzle [32m200 [90m43ms - 29b[0m
+exit
+[90mGET /puzzle [32m200 [90m29ms - 29b[0m
+exit
+[90mGET /puzzle [32m200 [90m43ms - 24b[0m
+exit
+[90mGET /puzzle [32m200 [90m6ms - 29b[0m
+data :  hello
+[90mGET /stc [32m200 [90m8ms - 5b[0m
+exit
+[90mGET /puzzle [32m200 [90m14ms - 29b[0m
+data :  world
+[90mGET /stc [32m200 [90m1ms - 5b[0m
+exit
+[90mGET /puzzle [32m200 [90m127ms - 29b[0m
+data :  world
+[90mGET /stc [32m200 [90m129ms - 5b[0m
+exit
+[90mGET /puzzle [32m200 [90m96ms - 34b[0m
+data :  nice
+[90mGET /stc [32m200 [90m98ms - 4b[0m
+Express server listening on port 3001
+exit
+[90mGET /puzzle [32m200 [90m135ms - 24b[0m
+data :  감사해요
+[90mGET /stc [32m200 [90m143ms - 12b[0m
+data :  이것도 풀어보시지 !!
+[90mGET /stc [32m200 [90m1ms - 28b[0m
+exit
+[90mGET /puzzle [32m200 [90m39ms - 24b[0m
+exit
+[90mGET /puzzle [32m200 [90m22ms - 19b[0m
+data :  이건 어떨까 ?
+[90mGET /stc [32m200 [90m23ms - 18b[0m
+exit
+[90mGET /puzzle [32m200 [90m51ms - 29b[0m
+data :  치킨 먹고 싶다...
+[90mGET /stc [32m200 [90m51ms - 23b[0m
+data :  안녕하세요
+[90mGET /stc [32m200 [90m1ms - 15b[0m
+exit
+[90mGET /puzzle [32m200 [90m11ms - 29b[0m
+exit
+[90mGET /puzzle [32m200 [90m36ms - 24b[0m
+data :  이얏 !
+[90mGET /stc [32m200 [90m37ms - 8b[0m
+exit
+[90mGET /puzzle [32m200 [90m47ms - 29b[0m
+data :  뿅뿅뿅 !!
+[90mGET /stc [32m200 [90m48ms - 12b[0m
+data :  안녕하세요
+[90mGET /stc [32m200 [90m1ms - 15b[0m
+exit
+[90mGET /puzzle [32m200 [90m71ms - 29b[0m
+data :  감사해요
+[90mGET /stc [32m200 [90m1ms - 12b[0m
+exit
+[90mGET /puzzle [32m200 [90m66ms - 19b[0m
+data :  다시만나요
+[90mGET /stc [32m200 [90m1ms - 15b[0m
+exit
+[90mGET /puzzle [32m200 [90m102ms - 29b[0m
+data :  정답은 123... 일까?
+[90mGET /stc [32m200 [90m1ms - 24b[0m
+exit
+[90mGET /puzzle [32m200 [90m7ms - 24b[0m
+data :  다시만나요
+[90mGET /stc [32m200 [90m1ms - 15b[0m
+exit
+[90mGET /puzzle [32m200 [90m52ms - 24b[0m
+data :  다시만나요
+[90mGET /stc [32m200 [90m1ms - 15b[0m
+exit
+[90mGET /puzzle [32m200 [90m83ms - 29b[0m
+data :  정답은 123... 일까?
+[90mGET /stc [32m200 [90m1ms - 24b[0m
+exit
+[90mGET /puzzle [32m200 [90m117ms - 19b[0m
+data :  너무 느린거 아니야 ?
+[90mGET /stc [32m200 [90m1ms - 28b[0m
+exit
+[90mGET /puzzle [32m200 [90m37ms - 29b[0m
+exit
+[90mGET /puzzle [32m200 [90m47ms - 24b[0m
+data :  $다시만나요
+[90mGET /stc [32m200 [90m2ms - 16b[0m
+exit
+[90mGET /puzzle [32m200 [90m27ms - 24b[0m
+data :  $감사해요
+[90mGET /stc [32m200 [90m1ms - 13b[0m
+data :  $뿅뿅뿅 !!
+[90mGET /stc [32m200 [90m1ms - 13b[0m
+exit
+[90mGET /puzzle [32m200 [90m85ms - 29b[0m
+data :  $이건 어떨까 ?
+[90mGET /stc [32m200 [90m1ms - 19b[0m
+exit
+[90mGET /puzzle [32m200 [90m24ms - 24b[0m
+data :  $다시만나요
+[90mGET /stc [32m200 [90m1ms - 16b[0m
+exit
+[90mGET /puzzle [32m200 [90m32ms - 24b[0m
+data :  $잘있어요
+[90mGET /stc [32m200 [90m1ms - 13b[0m
+exit
+[90mGET /puzzle [32m200 [90m171ms - 29b[0m
+data :  $치킨 먹고 싶다...
+[90mGET /stc [32m200 [90m1ms - 24b[0m
+exit
+[90mGET /puzzle [32m200 [90m68ms - 29b[0m
+data :  $이얏 !
+[90mGET /stc [32m200 [90m1ms - 9b[0m
+exit
+[90mGET /puzzle [32m200 [90m10ms - 29b[0m
+data :  $치킨 먹고 싶다...
+[90mGET /stc [32m200 [90m1ms - 24b[0m
+exit
+[90mGET /puzzle [32m200 [90m106ms - 24b[0m
+data :  $이건 어떨까 ?
+[90mGET /stc [32m200 [90m1ms - 19b[0m
+exit
+[90mGET /puzzle [32m200 [90m12ms - 24b[0m
+data :  $너무 느린거 아니야 ?
+[90mGET /stc [32m200 [90m1ms - 29b[0m
+exit
+[90mGET /puzzle [32m200 [90m2ms - 29b[0m
+exit
+[90mGET /puzzle [32m200 [90m40ms - 34b[0m
+data :  $뿅뿅뿅 !!
+[90mGET /stc [32m200 [90m1ms - 13b[0m
+data :  $이것도 풀어보시지 !!
+[90mGET /stc [32m200 [90m1ms - 29b[0m
+exit
+[90mGET /puzzle [32m200 [90m4ms - 29b[0m
+exit
+[90mGET /puzzle [32m200 [90m58ms - 34b[0m
+data :  $감사해요
+[90mGET /stc [32m200 [90m1ms - 13b[0m
+data :  $뿅뿅뿅 !!
+[90mGET /stc [32m200 [90m1ms - 13b[0m
+exit
+[90mGET /puzzle [32m200 [90m134ms - 24b[0m
+data :  $안녕하세요
+[90mGET /stc [32m200 [90m0ms - 16b[0m
+exit
+[90mGET /puzzle [32m200 [90m183ms - 24b[0m
+data :  $띠로리~~
+[90mGET /stc [32m200 [90m1ms - 12b[0m
+exit
+[90mGET /puzzle [32m200 [90m16ms - 24b[0m
+data :  $띠로리~~
+[90mGET /stc [32m200 [90m16ms - 12b[0m
+exit
+[90mGET /puzzle [32m200 [90m5ms - 19b[0m
+data :  $너무 느린거 아니야 ?
+[90mGET /stc [32m200 [90m1ms - 29b[0m
+exit
+[90mGET /puzzle [32m200 [90m137ms - 24b[0m
+data :  $이건 어떨까 ?
+[90mGET /stc [32m200 [90m1ms - 19b[0m
+exit
+[90mGET /puzzle [32m200 [90m73ms - 29b[0m
+data :  $잘있어요
+[90mGET /stc [32m200 [90m73ms - 13b[0m
+exit
+[90mGET /puzzle [32m200 [90m17ms - 29b[0m
+data :  $다시만나요
+[90mGET /stc [32m200 [90m17ms - 16b[0m
+exit
+[90mGET /puzzle [32m200 [90m28ms - 24b[0m
+exit
+[90mGET /puzzle [32m200 [90m23ms - 24b[0m
+data :  $정답은 123... 일까?
+[90mGET /stc [32m200 [90m1ms - 25b[0m
+exit
+[90mGET /puzzle [32m200 [90m7ms - 24b[0m
+data :  $감사해요
+[90mGET /stc [32m200 [90m0ms - 13b[0m
+exit
+[90mGET /puzzle [32m200 [90m31ms - 19b[0m
+data :  $치킨 먹고 싶다...
+[90mGET /stc [32m200 [90m32ms - 24b[0m
+exit
+[90mGET /puzzle [32m200 [90m53ms - 24b[0m
+data :  $안녕하세요
+[90mGET /stc [32m200 [90m55ms - 16b[0m
+data :  $치킨 먹고 싶다...
+[90mGET /stc [32m200 [90m1ms - 24b[0m
+exit
+[90mGET /puzzle [32m200 [90m144ms - 29b[0m
+data :  $이것도 풀어보시지 !!
+[90mGET /stc [32m200 [90m1ms - 29b[0m
+exit
+[90mGET /puzzle [32m200 [90m153ms - 24b[0m
+data :  $이건 어떨까 ?
+[90mGET /stc [32m200 [90m1ms - 19b[0m
+exit
+[90mGET /puzzle [32m200 [90m29ms - 24b[0m
+data :  $띠로리~~
+[90mGET /stc [32m200 [90m1ms - 12b[0m
+exit
+[90mGET /puzzle [32m200 [90m5ms - 29b[0m
+data :  $너무 느린거 아니야 ?
+[90mGET /stc [32m200 [90m2ms - 29b[0m
+exit
+[90mGET /puzzle [32m200 [90m12ms - 34b[0m
+data :  $뿅뿅뿅 !!
+[90mGET /stc [32m200 [90m1ms - 13b[0m
+exit
+[90mGET /puzzle [32m200 [90m6ms - 29b[0m
+exit
+[90mGET /puzzle [32m200 [90m29ms - 29b[0m
+data :  $안녕하세요
+[90mGET /stc [32m200 [90m1ms - 16b[0m
+exit
+[90mGET /puzzle [32m200 [90m9ms - 29b[0m
+data :  $다시만나요
+[90mGET /stc [32m200 [90m1ms - 16b[0m
+exit
+[90mGET /puzzle [32m200 [90m44ms - 24b[0m
+data :  $이건 어떨까 ?
+[90mGET /stc [32m200 [90m1ms - 19b[0m
+exit
+[90mGET /puzzle [32m200 [90m73ms - 29b[0m
+data :  $감사해요
+[90mGET /stc [32m200 [90m1ms - 13b[0m
+exit
+[90mGET /puzzle [32m200 [90m14ms - 29b[0m
+data :  $이건 어떨까 ?
+[90mGET /stc [32m200 [90m1ms - 19b[0m
+data :  $다시만나요
+[90mGET /stc [32m200 [90m1ms - 16b[0m
+exit
+[90mGET /puzzle [32m200 [90m1ms - 19b[0m
+data :  $이얏 !
+[90mGET /stc [32m200 [90m2ms - 9b[0m
+exit
+[90mGET /puzzle [32m200 [90m12ms - 24b[0m
+data :  $다시만나요
+[90mGET /stc [32m200 [90m1ms - 16b[0m
+exit
+[90mGET /puzzle [32m200 [90m16ms - 19b[0m
+data :  $정답은 123... 일까?
+[90mGET /stc [32m200 [90m1ms - 25b[0m
+exit
+[90mGET /puzzle [32m200 [90m91ms - 29b[0m
+data :  $감사해요
+[90mGET /stc [32m200 [90m1ms - 13b[0m
+exit
+[90mGET /puzzle [32m200 [90m9ms - 24b[0m
+data :  $감사해요
+[90mGET /stc [32m200 [90m1ms - 13b[0m
+exit
+[90mGET /puzzle [32m200 [90m79ms - 24b[0m
+data :  $너무 느린거 아니야 ?
+[90mGET /stc [32m200 [90m1ms - 29b[0m
+exit
+[90mGET /puzzle [32m200 [90m34ms - 29b[0m
+data :  $뿅뿅뿅 !!
+[90mGET /stc [32m200 [90m1ms - 13b[0m
+exit
+[90mGET /puzzle [32m200 [90m36ms - 24b[0m
+data :  $이것도 풀어보시지 !!
+[90mGET /stc [32m200 [90m1ms - 29b[0m
+exit
+[90mGET /puzzle [32m200 [90m12ms - 19b[0m
+exit
+[90mGET /puzzle [32m200 [90m28ms - 34b[0m
+exit
+[90mGET /puzzle [32m200 [90m45ms - 29b[0m
+data :  $잘있어요
+[90mGET /stc [32m200 [90m47ms - 13b[0m
+exit
+[90mGET /puzzle [32m200 [90m33ms - 24b[0m
+data :  $치킨 먹고 싶다...
+[90mGET /stc [32m200 [90m1ms - 24b[0m
+exit
+[90mGET /puzzle [32m200 [90m24ms - 24b[0m
+data :  $다시만나요
+[90mGET /stc [32m200 [90m1ms - 16b[0m
+data :  $이것도 풀어보시지 !!
+[90mGET /stc [32m200 [90m2ms - 29b[0m
+exit
+[90mGET /puzzle [32m200 [90m85ms - 24b[0m
+data :  $너무 느린거 아니야 ?
+[90mGET /stc [32m200 [90m86ms - 29b[0m
+exit
+[90mGET /puzzle [32m200 [90m170ms - 29b[0m
+data :  $이건 어떨까 ?
+[90mGET /stc [32m200 [90m1ms - 19b[0m
+exit
+[90mGET /puzzle [32m200 [90m12ms - 19b[0m
+data :  $뿅뿅뿅 !!
+[90mGET /stc [32m200 [90m1ms - 13b[0m
+exit
+[90mGET /puzzle [32m200 [90m55ms - 29b[0m
+data :  $띠로리~~
+[90mGET /stc [32m200 [90m55ms - 12b[0m
+exit
+[90mGET /puzzle [32m200 [90m36ms - 24b[0m
+data :  $이건 어떨까 ?
+[90mGET /stc [32m200 [90m1ms - 19b[0m
+exit
+[90mGET /puzzle [32m200 [90m46ms - 24b[0m
+data :  $정답은 123... 일까?
+[90mGET /stc [32m200 [90m47ms - 25b[0m
+exit
+[90mGET /puzzle [32m200 [90m36ms - 29b[0m
+data :  $정답은 123... 일까?
+[90mGET /stc [32m200 [90m1ms - 25b[0m
+exit
+[90mGET /puzzle [32m200 [90m17ms - 24b[0m
+data :  $잘있어요
+[90mGET /stc [32m200 [90m1ms - 13b[0m
+exit
+[90mGET /puzzle [32m200 [90m160ms - 29b[0m
+data :  $푸슝푸슝
+[90mGET /stc [32m200 [90m1ms - 13b[0m
+exit
+[90mGET /puzzle [32m200 [90m14ms - 24b[0m
+data :  $푸슝푸슝
+[90mGET /stc [32m200 [90m0ms - 13b[0m
+exit
+[90mGET /puzzle [32m200 [90m36ms - 24b[0m
+data :  $잘있어요
+[90mGET /stc [32m200 [90m38ms - 13b[0m
+exit
+[90mGET /puzzle [32m200 [90m28ms - 24b[0m
+data :  $뿅뿅뿅 !!
+[90mGET /stc [32m200 [90m1ms - 13b[0m
+exit
+[90mGET /puzzle [32m200 [90m41ms - 24b[0m
+data :  $푸슝푸슝
+[90mGET /stc [32m200 [90m1ms - 13b[0m
+exit
+[90mGET /puzzle [32m200 [90m58ms - 29b[0m
+data :  $이얏 !
+[90mGET /stc [32m200 [90m1ms - 9b[0m
+exit
+[90mGET /puzzle [32m200 [90m7ms - 24b[0m
+data :  $정답은 123... 일까?
+[90mGET /stc [32m200 [90m1ms - 25b[0m
+exit
+[90mGET /puzzle [32m200 [90m47ms - 24b[0m
+data :  $뿅뿅뿅 !!
+[90mGET /stc [32m200 [90m1ms - 13b[0m
+exit
+[90mGET /puzzle [32m200 [90m5ms - 29b[0m
+data :  $치킨 먹고 싶다...
+[90mGET /stc [32m200 [90m7ms - 24b[0m
+exit
+[90mGET /puzzle [32m200 [90m63ms - 19b[0m
+data :  $정답은 123... 일까?
+[90mGET /stc [32m200 [90m1ms - 25b[0m
+events.js:174
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: Connection lost: The server closed the connection.
+    at Protocol.end (/home/ubuntu/nodespace/BBNode/node_modules/mysql/lib/protocol/Protocol.js:112:13)
+    at Socket.<anonymous> (/home/ubuntu/nodespace/BBNode/node_modules/mysql/lib/Connection.js:97:28)
+    at Socket.<anonymous> (/home/ubuntu/nodespace/BBNode/node_modules/mysql/lib/Connection.js:525:10)
+    at Socket.emit (events.js:194:15)
+    at endReadableNT (_stream_readable.js:1125:12)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+Emitted 'error' event at:
+    at Connection._handleProtocolError (/home/ubuntu/nodespace/BBNode/node_modules/mysql/lib/Connection.js:426:8)
+    at Protocol.emit (events.js:189:13)
+    at Protocol._delegateError (/home/ubuntu/nodespace/BBNode/node_modules/mysql/lib/protocol/Protocol.js:398:10)
+    at Protocol.end (/home/ubuntu/nodespace/BBNode/node_modules/mysql/lib/protocol/Protocol.js:116:8)
+    at Socket.<anonymous> (/home/ubuntu/nodespace/BBNode/node_modules/mysql/lib/Connection.js:97:28)
+    [... lines matching original stack trace ...]
+    at process._tickCallback (internal/process/next_tick.js:63:19)
