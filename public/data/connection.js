@@ -4,10 +4,10 @@
 
 
 var connectionInformation = {
-		  host     : 'localhost',
-		  user     : 'root',
-		  password : '!Qazxsw2#Edc',
-		  database : 'mydb',
+		  host     : '',
+		  user     : '',
+		  password : '',
+		  database : '',
 		  port : 3306
 		};
 
