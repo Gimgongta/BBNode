@@ -32,8 +32,8 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-var conn = require('./conn/connection');
-conn.connect();
+//var conn = require('./conn/connection');
+//conn.connect();
 
 app.get('/', routes.index );
 app.get('/users', user.list);
