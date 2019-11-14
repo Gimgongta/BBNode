@@ -4,10 +4,10 @@
 
 var mysql = require('mysql');
 var connection = mysql.createConnection({
-	  host     : 'rocalhost',
-	  user     : 'root',
-	  password : '5ina6ur0',
-	  database : 'my_db'
+	  host     : '',
+	  user     : '',
+	  password : '',
+	  database : ''
 	});
 
 module.exports = connection;
